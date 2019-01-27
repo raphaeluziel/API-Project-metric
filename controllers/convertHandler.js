@@ -10,14 +10,14 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     var result;
-    
-    return result;
+    result = input.match(/\d+\.\d+/);
+    return result[0];
   };
   
   this.getUnit = function(input) {
     var result;
-    
-    return result;
+    result = input.match(/[A_Za-z]+/);
+    return result[0];
   };
   
   this.getReturnUnit = function(initUnit) {
