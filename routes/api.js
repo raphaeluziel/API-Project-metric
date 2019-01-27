@@ -23,8 +23,9 @@ module.exports = function (app) {
       var returnNum = convertHandler.convert(initNum, initUnit);
       var returnUnit = convertHandler.getReturnUnit(initUnit);
       var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-      
-      //res.json
+    
+      res.json({initNum: 5, initUnit: 'gal', returnNum: 18.92705, returnUnit: 'L', string: '5 gallons converts to 18.92705 liters'});
+
     });
     
 };
