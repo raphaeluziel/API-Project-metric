@@ -9,9 +9,40 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    var start = input.search(/\d/); 
-    var end = input.search(/[A-Za-z]/);
-    return Number(input.substring(start, end));
+    var result;
+    var start = input.search(/\d/); // Beginning of digit
+    var end = input.search(/[A-Za-z]/); // Beginning of unit
+    var divider = input.search(/\//); // Fraction?
+    var space = input.search(/\d\s+\d/); // Space?
+    var whole; // Whole part of mixed number
+    var rest; // Original string without whole number part
+
+    // If number is mixed, extract the "whole" part from the fraction
+    if (space > 0){
+      whole = input.substring(start, space + 1);
+      input = input.substring(space + 1);
+      start = start = input.search(/\d/);
+      divider = input.search(/\//);
+      end = input.search(/[A-Za-z]/);
+      result = Number(whole);
+    }
+    
+    // If number is a fraction extract numerator and denominator and divide
+    if(divider > 0){
+      var numerator = input.substring(start, divider);
+      var denominator = input.substring(divider + 1, end);
+      result += numerator / denominator;
+    } 
+    // Otherwise number is everything before unit
+    else{
+      result = Number(input.substring(start, end));
+    }
+    
+    // Round result to five decimal places
+    result *= 100000;
+    result = Math.round(result) / 100000;
+    
+    return result;
   };
   
   this.getUnit = function(input) { 
