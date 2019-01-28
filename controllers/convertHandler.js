@@ -19,7 +19,7 @@ function ConvertHandler() {
     if (start < 0) return 1;
 
     // If number is mixed, extract the "whole" part from the fraction
-    if (space > 0){
+    if (space >= 0){
       whole = input.substring(start, space + 1);
       whole = Number(whole);
       // Remove whole number part of input
@@ -51,11 +51,14 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) { 
+    var start = input.search(/\d/); // Beginning of digit 
     var end = input.search(/[A-Za-z]/);
     var unit = input.substring(end);
+    /*
     if ((unit!= 'gal') || (unit != 'L') || (unit != 'mi') || (unit != 'km') || (unit != 'lbs') || (unit != 'kg')){
       return 'invalid unit';
     }
+    */
     return input.substring(end);
   };
   
@@ -97,7 +100,7 @@ function ConvertHandler() {
     initUnit === 'gal' ? result *= galToL
     : initUnit === 'L' ? result /= galToL
     : initUnit === 'lbs' ? result *= lbsToKg
-    : initUnit === 'Kg' ? result /= lbsToKg
+    : initUnit === 'kg' ? result /= lbsToKg
     : initUnit === 'mi' ? result *= miToKm
     : initUnit === 'km' ? result /= miToKm
     : result = 'invalid unit';
