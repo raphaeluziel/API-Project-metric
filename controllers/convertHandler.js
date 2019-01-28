@@ -10,21 +10,24 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     var result;
-    var start = input.search(/\d/); // Beginning of digit
+    var start = input.search(/\d/); // Beginning of digit    
     var end = input.search(/[A-Za-z]/); // Beginning of unit
     var divider = input.search(/\//); // Fraction?
     var space = input.search(/\d\s+\d/); // Space?
     var whole = 0; // Whole part of mixed number
-    //var rest; // Original string without whole number part
+    
+    if (start < 0) return 1;
 
     // If number is mixed, extract the "whole" part from the fraction
     if (space > 0){
       whole = input.substring(start, space + 1);
+      whole = Number(whole);
+      // Remove whole number part of input
       input = input.substring(space + 1);
+      // Recalculate location to search for rest of number and unit
       start = start = input.search(/\d/);
       divider = input.search(/\//);
-      end = input.search(/[A-Za-z]/);
-      whole = Number(whole);
+      end = input.search(/[A-Za-z]/); 
     }
 
     // If number is a fraction extract numerator and denominator and divide
@@ -43,7 +46,6 @@ function ConvertHandler() {
     result = Math.round(result) / 100000;
 
     return result;
-    return input.substring(start, end);
   };
   
   this.getUnit = function(input) { 
