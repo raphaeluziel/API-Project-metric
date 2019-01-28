@@ -14,8 +14,8 @@ function ConvertHandler() {
     var end = input.search(/[A-Za-z]/); // Beginning of unit
     var divider = input.search(/\//); // Fraction?
     var space = input.search(/\d\s+\d/); // Space?
-    var whole; // Whole part of mixed number
-    var rest; // Original string without whole number part
+    var whole = 0; // Whole part of mixed number
+    //var rest; // Original string without whole number part
 
     // If number is mixed, extract the "whole" part from the fraction
     if (space > 0){
@@ -24,14 +24,14 @@ function ConvertHandler() {
       start = start = input.search(/\d/);
       divider = input.search(/\//);
       end = input.search(/[A-Za-z]/);
-      result = Number(whole);
+      whole = Number(whole);
     }
 
     // If number is a fraction extract numerator and denominator and divide
     if(divider > 0){
       var numerator = input.substring(start, divider);
       var denominator = input.substring(divider + 1, end);
-      result += numerator / denominator;
+      result = whole + numerator / denominator;
     } 
     // Otherwise number is everything before unit
     else{
