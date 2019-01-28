@@ -45,38 +45,31 @@ function ConvertHandler() {
     result *= 100000;
     result = Math.round(result) / 100000;
 
+    if (!result) {result = 'invalid number';}
+    
     return result;
   };
   
   this.getUnit = function(input) { 
     var end = input.search(/[A-Za-z]/);
+    var unit = input.substring(end);
+    if ((unit!= 'gal') || (unit != 'L') || (unit != 'mi') || (unit != 'km') || (unit != 'lbs') || (unit != 'kg')){
+      return 'invalid unit';
+    }
     return input.substring(end);
   };
   
   this.getReturnUnit = function(initUnit) {
     var result;
-    switch(initUnit){
-      case 'gal':
-        result = 'L';
-        break;
-      case 'L':
-        result ='gal';
-        break;
-      case 'lbs':
-        result ='kg';
-        break;
-      case 'kg':
-        result ='lbs';
-        break;
-      case 'mi':
-        result ='km';
-        break;
-      case 'km':
-        result = 'mi';
-        break;       
-      default:
-        result = 'invalid unit';
-    }
+    
+    initUnit === 'gal' ? result = 'L'
+    : initUnit === 'L' ? result = 'gal'
+    : initUnit === 'lbs' ? result = 'kg'
+    : initUnit === 'kg' ? result = 'lbs'
+    : initUnit === 'mi' ? result = 'km'
+    : initUnit === 'km' ? result = 'mi'
+    : result = 'invalid unit';
+    
     return result;
   };
 
@@ -116,10 +109,8 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
-    result = initNum + " " + this.spellOutUnit(initUnit) + " converts to " + returnNum + " " + this.spellOutUnit(returnUnit);
-    return result;
-  };
+    return initNum + " " + this.spellOutUnit(initUnit) + " converts to " + returnNum + " " + this.spellOutUnit(returnUnit);
+  }
   
 }
 
