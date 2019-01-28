@@ -54,11 +54,11 @@ function ConvertHandler() {
     var start = input.search(/\d/); // Beginning of digit 
     var end = input.search(/[A-Za-z]/);
     var unit = input.substring(end);
-    /*
-    if ((unit!= 'gal') || (unit != 'L') || (unit != 'mi') || (unit != 'km') || (unit != 'lbs') || (unit != 'kg')){
+    
+    if ((unit != 'gal') && (unit != 'L') && (unit != 'mi') && (unit != 'km') && (unit != 'lbs') && (unit != 'kg')){
       return 'invalid unit';
     }
-    */
+    
     return input.substring(end);
   };
   
