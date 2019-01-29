@@ -53,20 +53,20 @@ function ConvertHandler() {
   this.getUnit = function(input) { 
     var start = input.search(/\d/);
     var end = input.search(/[A-Za-z]/);
-    var unit = input.substring(end);
+    var unit = input.substring(end).toLowerCase();
     
-    if ((unit != 'gal') && (unit != 'L') && (unit != 'mi') && (unit != 'km') && (unit != 'lbs') && (unit != 'kg')){
+    if ((unit != 'gal') && (unit != 'l') && (unit != 'mi') && (unit != 'km') && (unit != 'lbs') && (unit != 'kg')){
       return 'invalid unit';
     }
     
-    return input.substring(end);
+    return unit;
   };
   
   this.getReturnUnit = function(initUnit) {
     var result;
     
-    initUnit === 'gal' ? result = 'L'
-    : initUnit === 'L' ? result = 'gal'
+    initUnit === 'gal' ? result = 'l'
+    : initUnit === 'l' ? result = 'gal'
     : initUnit === 'lbs' ? result = 'kg'
     : initUnit === 'kg' ? result = 'lbs'
     : initUnit === 'mi' ? result = 'km'
@@ -80,7 +80,7 @@ function ConvertHandler() {
     var result;
     
     unit === 'gal' ? result = 'gallons'
-    : unit === 'L' ? result = 'liters'
+    : unit === 'l' ? result = 'liters'
     : unit === 'lbs' ? result = 'pounds'
     : unit === 'kg' ? result = 'kilograms'
     : unit === 'mi' ? result = 'miles'
