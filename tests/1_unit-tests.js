@@ -18,33 +18,38 @@ suite('Unit Tests', function(){
     
     test('Whole number input', function(done) {
       var input = '32L';
-      assert.equal(convertHandler.getNum(input),32);
+      assert.equal(convertHandler.getNum(input), 32);
       done();
     });
     
     test('Decimal Input', function(done) {
-      
-      //done();
+      var input = '32.7kg';
+      assert.equal(convertHandler.getNum(input), 32.7);
+      done();
     });
     
     test('Fractional Input', function(done) {
-      
-      //done();
+      var input = '3/5 gal';
+      assert.equal(convertHandler.getNum(input), 0.6);
+      done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      var input = '3.9/15.8 gal';
+      assert.equal(convertHandler.getNum(input), 0.24684);
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      var input = '1/2/6 kg';
+      assert.equal(convertHandler.getNum(input), 'invalid number');
+      done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      var input = '    kg';
+      assert.equal(convertHandler.getNum(input), 1);
+      done();
     }); 
     
   });
