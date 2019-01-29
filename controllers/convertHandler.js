@@ -51,7 +51,7 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) { 
-    var start = input.search(/\d/); // Beginning of digit 
+    var start = input.search(/\d/);
     var end = input.search(/[A-Za-z]/);
     var unit = input.substring(end);
     
