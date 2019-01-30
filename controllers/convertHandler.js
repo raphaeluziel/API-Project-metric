@@ -59,10 +59,11 @@ function ConvertHandler() {
       return 'invalid unit';
     }
     
-    return unit;
+    return input.substring(end);
   };
   
   this.getReturnUnit = function(initUnit) {
+    initUnit = initUnit.toLowerCase();
     var result;
     
     initUnit === 'gal' ? result = 'l'
